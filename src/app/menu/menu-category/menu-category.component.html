@@ -1,7 +1,7 @@
-<div class="categories" *ngFor="let category of categories">
   <div class="category-title">
+    <!-- <textarea id="title_area" [(ngModel)]="category.title" *ngIf="isAdding"></textarea> -->
     {{category}}
-    <button (click)="deleteCategory()"><i class="fas fa-times"></i></button>
+    <button><i class="fas fa-times"></i></button>
+    <app-menu-category-item></app-menu-category-item>
   </div>
-  <app-menu-category-item></app-menu-category-item>
-</div>
+

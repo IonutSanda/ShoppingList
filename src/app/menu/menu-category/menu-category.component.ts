@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { outputAst } from '@angular/compiler';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AddItemService } from '../services/add-item.service';
 
 @Component({
@@ -8,16 +9,11 @@ import { AddItemService } from '../services/add-item.service';
 })
 export class MenuCategoryComponent implements OnInit {
 
-  constructor(private itemService: AddItemService) { }
+  constructor() { }
 
-  categories:string[]=[];
+  @Input() category:string = '';
 
+  
   ngOnInit(): void {
-    this.categories = this.itemService.getCategories();
   }
-
-  deleteCategory(){
-    this.itemService.deleteCategory();
-  }
-
 }

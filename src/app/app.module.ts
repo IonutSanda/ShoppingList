@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { MenuCategoryComponent } from './menu/menu-category/menu-category.component';
 import { MenuCategoryItemComponent } from './menu/menu-category-item/menu-category-item.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MenuCategoryItemComponent } from './menu/menu-category-item/menu-catego
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,17 +8,23 @@ import { AddItemService } from './services/add-item.service';
 })
 export class MenuComponent implements OnInit {
 
-  categories:string[] = []
-
-  constructor(private addItem: AddItemService) { }
+  constructor() { }
+  isAdding = false;
 
   ngOnInit(): void {
-    this.categories = this.addItem.getCategories();
   }
 
-  addCategory(){
-    this.addItem.addCategory();
-  }
+  categories:string[] = ['Ciorba'];
+  categoriesTitle: string = '';
 
+  setIsAdding(){
+    this.isAdding = true;
+  }
+  
+  onAddTitle(){
+    this.categories.push(this.categoriesTitle);
+    this.isAdding = false;
+    console.log(this.categories);
+  }
   
 }
