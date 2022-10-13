@@ -12,8 +12,12 @@ export class MenuCategoryComponent implements OnInit {
   constructor() { }
 
   @Input() category:string = '';
-
+  @Output() categoryTitle = new EventEmitter<string>();
   
   ngOnInit(): void {
+  }
+
+  onDeleteCategory(){
+    this.categoryTitle.emit(this.category);
   }
 }

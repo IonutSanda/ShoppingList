@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  categories:string[] = ['Ciorba'];
+  categories:string[] = [];
   categoriesTitle: string = '';
 
   setIsAdding(){
@@ -25,6 +25,13 @@ export class MenuComponent implements OnInit {
     this.categories.push(this.categoriesTitle);
     this.isAdding = false;
     console.log(this.categories);
+  }
+
+  onDeleteCategory(data:string){
+    const index = this.categories.indexOf(data);
+    if(index !== -1){
+      this.categories.splice(index,1);
+    }
   }
   
 }

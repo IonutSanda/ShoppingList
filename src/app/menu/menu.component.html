@@ -17,7 +17,7 @@
   <div class="menu-categories">
     <input [(ngModel)]="categoriesTitle" *ngIf="isAdding" (keyup.enter)="onAddTitle()">
     <div class="menu-category">
-      <app-menu-category  *ngFor="let category of categories" [category]="category"></app-menu-category>
+      <app-menu-category *ngFor="let category of categories" [category]="category" (categoryTitle)="onDeleteCategory($event)"></app-menu-category>
     </div>
   </div>
 
