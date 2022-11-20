@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AddItemService } from './services/add-item.service';
 
 @Component({
@@ -8,30 +9,36 @@ import { AddItemService } from './services/add-item.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private addItemService: AddItemService) { }
+  
   isAdding = false;
-
-  ngOnInit(): void {
-  }
-
   categories:string[] = [];
   categoriesTitle: string = '';
 
-  setIsAdding(){
+  ngOnInit(): void {
+    this.addItemService.categoriesSub.subscribe((categories) => {
+      this.categories = categories;
+    })
+    this.addItemService.getCategories();
+  }
+
+  onSetIsAdding(){
     this.isAdding = true;
   }
-  
-  onAddTitle(){
-    this.categories.push(this.categoriesTitle);
+
+  onCancelAddMode(){
     this.isAdding = false;
-    console.log(this.categories);
+    this.categoriesTitle = '';
+  }
+
+  onAddTitle(){
+    this.addItemService.addCategory(this.categoriesTitle);
+    this.categoriesTitle = '';
+    this.isAdding = false;
   }
 
   onDeleteCategory(data:string){
-    const index = this.categories.indexOf(data);
-    if(index !== -1){
-      this.categories.splice(index,1);
-    }
+    this.addItemService.deleteCategory(data);
   }
   
 }

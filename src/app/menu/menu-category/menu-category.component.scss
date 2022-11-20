@@ -4,10 +4,22 @@
 }
 
 .category-title{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
 }
 
 button{
     float: right;
+    margin: 3px;
+    border-radius: 5px;
 }
+
+button:hover {
+    background-color: rgb(73, 73, 73);
+    color: white;
+  }
+  
+  button:active {
+    transform: translateY(4px);
+  }

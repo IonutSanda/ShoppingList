@@ -1,6 +1,6 @@
 <div class="wrapper">
-  
-  <div class="navbar">
+
+  <div class="navbar-vertical">
     <div class="navbar-items">
       <div class="navbar-list">
         <i class="fas fa-list-ul"></i><span>Lists</span>
@@ -9,15 +9,20 @@
         <i class="fas fa-history"></i><span>History</span>
       </div>
       <div class="add-category">
-        <button (click)="setIsAdding()"><i class="fas fa-plus"></i><span>Add Category</span></button>
+        <button (click)="onSetIsAdding()"><i class="fas fa-plus"></i><span>Add Category</span></button>
       </div>
     </div>
   </div>
 
   <div class="menu-categories">
-    <input [(ngModel)]="categoriesTitle" *ngIf="isAdding" (keyup.enter)="onAddTitle()">
+    <div class="input-button" *ngIf="isAdding">
+      <input class="form-control" [(ngModel)]="categoriesTitle" (keyup.enter)="onAddTitle()">
+      <button type="button" class="btn btn-secondary input-confirm" (click)="onAddTitle()" [disabled]="!categoriesTitle">OK</button>
+      <button type="button" class="btn btn-secondary input-confirm" (click)="onCancelAddMode()">Cancel</button>
+    </div>
     <div class="menu-category">
-      <app-menu-category *ngFor="let category of categories" [category]="category" (categoryTitle)="onDeleteCategory($event)"></app-menu-category>
+      <app-menu-category *ngFor="let category of categories" [category]="category"
+        (categoryTitle)="onDeleteCategory($event)"></app-menu-category>
     </div>
   </div>
 

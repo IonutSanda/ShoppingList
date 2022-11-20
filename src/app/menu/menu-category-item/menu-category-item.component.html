@@ -1,18 +1,31 @@
-<div class="card" *ngFor="let card of cards">
+<form [formGroup]="itemForm" *ngIf="isAddMode">
+  <label for="itemName">Item: </label>
+  <input id="itemName" type="text" formControlName="itemName">
+  <br>
+  <label for="price">Price: </label>
+  <input id="price" type="number" formControlName="price">
+  <br>
+  <label for="shop">Shop: </label>
+  <input id="shop" type="text" formControlName="shop">
+  <br>
+  <label for="amountToBuy">Amount To Buy: </label>
+  <input id="amountToBuy" type="number" formControlName="amountToBuy">
+  <br>
+  <button type="button" (click)="onUpdateForm()">Save</button>
+</form>
+
+<div class="card" *ngFor="let item of items">
   <div class="card-item">
-    Card item
+    Item Name:  {{item.itemName}}
   </div>
   <div class="card-price">
-    Card price
+    Price: {{item.price}}
   </div>
   <div class="card-shop">
-    Shop
+    Shop: {{item.shop}}
   </div>
   <div class="card-amount">
-    Amount to buy
+    Amount: {{item.amountToBuy}}
   </div>
-  <div class="buttons">
-    <button><i class="fas fa-plus"></i></button>
-    <button><i class="fas fa-minus"></i></button>
-  </div>
+  <button type="button" (click)="onDeleteItem(item)">Delete</button>
 </div>

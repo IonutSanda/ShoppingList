@@ -1,19 +1,32 @@
-.cards{
-    display: flex;
-    flex-direction: row;
+.cards {
+  display: flex;
+  flex-direction: row;
 }
 
-.card{
-    border: 1px solid lightgray;
-    width: 100%;
-    margin-right: 10%;
+.card {
+  border: 1px solid lightgray;
+  width: 100%;
+  margin-right: 10%;
 }
 
-.card-item{
-    margin-top: 15px;
+.card-item {
+  margin-top: 15px;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-between;
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.saveButton {
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: rgb(73, 73, 73);
+  color: white;
+}
+
+button:active {
+  transform: translateY(4px);
 }

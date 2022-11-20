@@ -2,6 +2,8 @@
     <!-- <textarea id="title_area" [(ngModel)]="category.title" *ngIf="isAdding"></textarea> -->
     {{category}}
     <button (click)="onDeleteCategory()"><i class="fas fa-times"></i></button>
-    <app-menu-category-item></app-menu-category-item>
+    <button (click)="onAddItem()">Add Item</button>
+    <!-- <app-menu-category-item [isAddMode]="isAddMode" (isAddModeOut)="isAddModeOut($event)" (updateForm)="onUpdateform($event)"></app-menu-category-item> -->
+    <app-menu-category-item [(isAddMode)]="isAddMode" (updateForm)="onUpdateform($event)"></app-menu-category-item>
   </div>
 
