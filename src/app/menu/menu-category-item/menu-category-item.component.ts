@@ -1,7 +1,7 @@
+import { Item, Category } from './../services/models/item.model';
 import { AddItemService } from './../services/add-item.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Item } from '../services/models/item.model';
 
 @Component({
   selector: 'app-menu-category-item',
@@ -12,12 +12,12 @@ export class MenuCategoryItemComponent implements OnInit {
 
   constructor(private addItemService: AddItemService) { }
 
-  @Input() item!: Item;
   @Input() isAddMode: boolean = true;
   @Output() isAddModeChange = new EventEmitter<any>();
-  @Output() updateForm = new EventEmitter<any>();
-  // itemForm: FormGroup;
-  items: any[] = [];
+  data: Category[] = [];
+  category!: Category;
+  @Input() categoryName!: string;
+  categoryItems!: Item[];
 
 
   itemForm = new FormGroup({
@@ -28,21 +28,24 @@ export class MenuCategoryItemComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.addItemService.itemsSub.subscribe((items) => {
-      this.items = items;
+    this.addItemService.dataSub.subscribe((data) => {
+      this.data = data;
     })
-    this.addItemService.getItems();
+    this.addItemService.getCategories();
   }
-
+  
   onUpdateForm(){
-    // this.addItemService.addItem(this.itemForm.value)
+    this.addItemService.addItemToCategory(this.categoryName, <Item>this.itemForm.value);
+    this.addItemService.getCategoryByName(this.categoryName);
+    // this.addItemService.getCategoryById(this.categoryName);
+    this.onCancelForm();
+  }
+  onCancelForm(){
     this.itemForm.reset();
     this.isAddModeChange.emit(false);
   }
 
-  onDeleteItem(data: any){
-    this.addItemService.deleteItemByIndex(data);
+  onTest(){
   }
-
 
 }

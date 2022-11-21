@@ -12,11 +12,12 @@
   <input id="amountToBuy" type="number" formControlName="amountToBuy">
   <br>
   <button type="button" (click)="onUpdateForm()">Save</button>
+  <button type="button" (click)="onCancelForm()">Cancel</button>
 </form>
 
-<div class="card" *ngFor="let item of items">
-  <div class="card-item">
-    Item Name:  {{item.itemName}}
+<div class="card">
+  <!-- <div class="card-item">
+    Item Name:  {{item.name}}
   </div>
   <div class="card-price">
     Price: {{item.price}}
@@ -26,6 +27,6 @@
   </div>
   <div class="card-amount">
     Amount: {{item.amountToBuy}}
-  </div>
-  <button type="button" (click)="onDeleteItem(item)">Delete</button>
+  </div> -->
+  <button type="button" (click)="onTest()">Delete</button>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { AddItemService } from './services/add-item.service';
-import { Cateogry } from './services/models/item.model';
+import { Category } from './services/models/item.model';
 
 @Component({
   selector: 'app-menu',
@@ -13,11 +12,12 @@ export class MenuComponent implements OnInit {
   constructor(private addItemService: AddItemService) { }
   
   isAdding = false;
-  categories:Cateogry[] = [];
-  categoriesTitle!: Cateogry;
+  categories:Category[] = [];
+  categoryNameInput!: string;
+  categoryTitle!: string;
 
   ngOnInit(): void {
-    this.addItemService.categoriesSub.subscribe((categories) => {
+    this.addItemService.dataSub.subscribe((categories) => {
       this.categories = categories;
     })
     this.addItemService.getCategories();
@@ -29,14 +29,14 @@ export class MenuComponent implements OnInit {
 
   onCancelAddMode(){
     this.isAdding = false;
-    this.categoriesTitle.name = '';
+    this.categoryNameInput = '';
   }
-
+  
   onAddTitle(){
-    this.addItemService.addCategory(this.categoriesTitle);
-    this.categoriesTitle.name = '';
     this.isAdding = false;
-    console.log('test');
+    this.categoryTitle = this.categoryNameInput;
+    this.addItemService.addCategory(this.categoryTitle);
+    this.categoryNameInput = '';
   }
 
   onDeleteCategory(data:string){

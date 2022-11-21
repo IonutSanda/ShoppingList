@@ -1,7 +1,7 @@
-import { outputAst } from '@angular/compiler';
+import { AddItemService } from './../services/add-item.service';
+import { Category } from './../services/models/item.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AddItemService } from '../services/add-item.service';
-import { Cateogry, Item } from '../services/models/item.model';
+
 
 @Component({
   selector: 'app-menu-category',
@@ -10,29 +10,33 @@ import { Cateogry, Item } from '../services/models/item.model';
 })
 export class MenuCategoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private addItemService: AddItemService) { }
 
-  @Input() category!:Cateogry;
+  @Input() category!:string;
   @Output() categoryTitle = new EventEmitter<string>();
+  categories: Category[] = [];
   isAddMode = false;
+  categoryName!: string;
 
   
   ngOnInit(): void {
+    this.addItemService.dataSub.subscribe((categories) => {
+      this.categories = categories;
+    })
+    this.addItemService.getCategories();
+    this.categoryName = this.category;
   }
 
   onDeleteCategory(){
-    this.categoryTitle.emit(this.category.name);
+    this.categoryTitle.emit(this.categoryName);
   }
 
   onAddItem(){
+    console.log(this.categories);
     this.isAddMode = true;
   }
   
-  onUpdateform(data:any){
-    // console.log(this.items);
-  }
-
-  isAddModeOut(data: boolean){
-    this.isAddMode = data;
-  }
+  // onUpdateform(){
+  //   this.categoryName = this.category.name;
+  // }
 }

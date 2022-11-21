@@ -1,4 +1,4 @@
-import { Cateogry, Item } from './models/item.model';
+import { Category, Item } from './models/item.model';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -6,46 +6,41 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AddItemService {
-  categoriesSub = new Subject<Cateogry[]>();
-  categoriesObs = this.categoriesSub.asObservable();
-
-  itemsSub = new Subject<any[]>();
+  dataSub = new Subject<Category[]>();
+  categoriesObs = this.dataSub.asObservable();
 
   constructor() { }
 
-  // categories:string[]= [];
-  // items: any[] = [];
+  data: Category[] =[]
 
-  data: Cateogry[] =[]
-
-  addCategory(categoriesTitle: Cateogry){
-    this.data.push(categoriesTitle);
-    this.categoriesSub.next(this.data);
-    console.log(this.data);
+  addCategory(categoriesTitle: string){
+    const newCategory = {name: categoriesTitle, items: []}
+    this.data.push(newCategory);
+    this.dataSub.next(this.data);
   }
   
   getCategories(){
-    // this.categoriesSub.next(this.categories.slice());
+    this.dataSub.next(this.data.slice());
+  }
+
+  getCategoryByName(categoryName: string){
+    const category = this.data.find(({name}) => name === categoryName);
+    console.log('ce avem in category din service?')
+    console.log(category);
   }
 
   deleteCategory(category: string){
-    // const index = this.categories.indexOf(category);
-    // this.categories.splice(index, 1);
-    // this.categoriesSub.next(this.categories.slice());
+    this.data = this.data.filter((obj) => {
+      return obj.name !== category;
+    })
+    // this.da.splice(index, 1);
+    this.dataSub.next(this.data);
   }
 
-  addItem(item: any, categoryId: number){
-    // this.data[categoryId].items.push(item);
-    // this.itemsSub.next(this.items);
+  addItemToCategory(categoryName: string, items: Item){
+    const arrPos = this.data.find(({ name }) => name === categoryName);
+    arrPos?.items?.push(items);
+    this.dataSub.next(this.data);
   }
   
-  getItems(){
-    // this.itemsSub.next(this.items.slice());
-  }
-  
-  deleteItemByIndex(item: string){
-    // const index = this.items.indexOf(item)
-    // this.items.splice(index, 1);
-    // this.itemsSub.next(this.items);
-  }
 }

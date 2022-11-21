@@ -1,4 +1,4 @@
-export interface Cateogry{
+export interface Category{
     name: string
     items: Item[]
 }

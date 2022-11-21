@@ -16,12 +16,12 @@
 
   <div class="menu-categories">
     <div class="input-button" *ngIf="isAdding">
-      <input class="form-control" [(ngModel)]="categoriesTitle" (keyup.enter)="onAddTitle()">
-      <button type="button" class="btn btn-secondary input-confirm" (click)="onAddTitle()" [disabled]="!categoriesTitle">OK</button>
+      <input class="form-control" [(ngModel)]="categoryNameInput" (keyup.enter)="onAddTitle()">
+      <button type="button" class="btn btn-secondary input-confirm" (click)="onAddTitle()" [disabled]="!categoryNameInput">OK</button>
       <button type="button" class="btn btn-secondary input-confirm" (click)="onCancelAddMode()">Cancel</button>
     </div>
     <div class="menu-category">
-      <app-menu-category *ngFor="let category of categories" [category]="category"
+      <app-menu-category *ngFor="let category of categories" [category]="categoryTitle"
         (categoryTitle)="onDeleteCategory($event)"></app-menu-category>
     </div>
   </div>
