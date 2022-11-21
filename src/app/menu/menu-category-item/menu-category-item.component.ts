@@ -35,7 +35,7 @@ export class MenuCategoryItemComponent implements OnInit {
   }
 
   onUpdateForm(){
-    this.addItemService.addItem(this.itemForm.value)
+    // this.addItemService.addItem(this.itemForm.value)
     this.itemForm.reset();
     this.isAddModeChange.emit(false);
   }
