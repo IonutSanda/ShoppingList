@@ -35,6 +35,7 @@ export class MenuComponent implements OnInit {
     this.addItemService.addCategory(this.categoriesTitle);
     this.categoriesTitle = '';
     this.isAdding = false;
+    console.log('test');
   }
 
   onDeleteCategory(data:string){
